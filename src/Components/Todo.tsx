@@ -5,11 +5,11 @@ import { AiFillEdit } from 'react-icons/ai';
 
 interface ITodo {
   todos: {
-    id: any;
+    id: number;
     text: string;
   }[];
-  removeTodo: (id: any) => void;
-  updateTodo: (id: any, value: { id: string; text: string }) => void;
+  removeTodo: (id: number) => void;
+  updateTodo: (id: number | null, value: { id: string; text: string }) => void;
   setError: React.Dispatch<React.SetStateAction<string>>;
 }
 function Todo({ todos, updateTodo, removeTodo, setError }: ITodo) {
@@ -17,7 +17,7 @@ function Todo({ todos, updateTodo, removeTodo, setError }: ITodo) {
     id: null,
     value: '',
   });
-  const submitUpdate = (value: any) => {
+  const submitUpdate = (value: { id: any; text: string }) => {
     updateTodo(edit.id, value);
     setEdit({
       id: null,

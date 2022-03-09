@@ -23,7 +23,7 @@ function TodoList() {
     setTodos(newTodos);
   };
 
-  const updateTodo = (todoId: number, newValue: { id: string; text: string }) => {
+  const updateTodo = (todoId: number | null, newValue: { id: string; text: string }) => {
     setTodos((prev) => prev.map((item) => (item.id === todoId ? newValue : item)));
   };
 
