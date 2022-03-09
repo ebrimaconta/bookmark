@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TodoForm from './TodoForm';
 import { MdDeleteForever } from 'react-icons/md';
 import { AiFillEdit } from 'react-icons/ai';
@@ -11,15 +11,12 @@ interface ITodo {
   removeTodo: (id: any) => void;
   updateTodo: (id: any, value: { id: string; text: string }) => void;
   setError: React.Dispatch<React.SetStateAction<string>>;
-  setEdit: React.Dispatch<
-    React.SetStateAction<{
-      id: any;
-      value: string;
-    }>
-  >;
-  edit: { id: any; value: any };
 }
-function Todo({ todos, edit, updateTodo, removeTodo, setError, setEdit }: ITodo): JSX.Element {
+function Todo({ todos, updateTodo, removeTodo, setError }: ITodo) {
+  const [edit, setEdit] = useState({
+    id: null,
+    value: '',
+  });
   const submitUpdate = (value: any) => {
     updateTodo(edit.id, value);
     setEdit({
@@ -46,7 +43,12 @@ function Todo({ todos, edit, updateTodo, removeTodo, setError, setEdit }: ITodo)
             <div key={todo.id}>{todo.text}</div>
             <div className='icons'>
               <MdDeleteForever onClick={() => removeTodo(todo.id)} className='delete-icon' />
-              <AiFillEdit onClick={() => setEdit({ id: todo.id, value: todo.text })} className='edit-icon' />
+              <AiFillEdit
+                onClick={() => {
+                  setEdit({ id: todo.id, value: todo.text });
+                }}
+                className='edit-icon'
+              />
             </div>
           </div>
         )

@@ -11,7 +11,6 @@ interface ITodoForm {
 }
 function TodoForm({ edit, setError, onSubmit }: ITodoForm) {
   const [input, setInput] = useState(edit ? edit.value : '');
-  const [count, setCount] = useState(0);
 
   const inputRef = useRef(null);
 
@@ -22,11 +21,10 @@ function TodoForm({ edit, setError, onSubmit }: ITodoForm) {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    setCount(count + 1);
     if (isValidHttpUrl(input)) {
       setError('');
       onSubmit({
-        id: count,
+        id: Date.now(),
         text: input,
       });
     } else {
@@ -38,7 +36,7 @@ function TodoForm({ edit, setError, onSubmit }: ITodoForm) {
 
   return (
     <form onSubmit={handleSubmit} className='todo-form'>
-      {edit ? (
+      {edit.id ? (
         <>
           <input
             placeholder='Update your item'

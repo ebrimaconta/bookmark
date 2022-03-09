@@ -10,10 +10,7 @@ function TodoList() {
     }[]
   >([]);
   const [error, setError] = useState('');
-  const [edit, setEdit] = useState({
-    id: null,
-    value: '',
-  });
+
   const [count, setCount] = useState<{
     currentPage: any;
     todosPerPage: number;
@@ -51,14 +48,7 @@ function TodoList() {
           value: '',
         }}
       />
-      <Todo
-        todos={sliceTodo}
-        setError={setError}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-        edit={edit}
-        setEdit={setEdit}
-      />
+      <Todo todos={sliceTodo} setError={setError} removeTodo={removeTodo} updateTodo={updateTodo} />
       {todos.length >= 1 && (
         <Pagination
           defaultActivePage={1}
